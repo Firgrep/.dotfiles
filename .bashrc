@@ -9,6 +9,7 @@
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
+alias c='clear'
 alias chmod="chmod -c"
 alias cp='cp -iv'
 alias df="df -h"
@@ -16,6 +17,10 @@ alias grep='grep --color=auto'
 alias ls='ls -la --color=auto'
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'
+
+## git
+alias gbd='git branch -d'
+alias gbD='git branch -D'
 
 ## scripts
 alias cgo='~/cgo.sh'
