@@ -7,8 +7,8 @@
 
 #=== ALIASES
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
 alias c='clear'
 alias chmod="chmod -c"
 alias cp='cp -iv'
