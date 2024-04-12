@@ -18,6 +18,7 @@ alias ls='ls -la --color=auto'
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias stow='stow -v'
+alias rm='rm -v'
 
 ## git
 alias gbd='git branch -d'
@@ -26,6 +27,7 @@ alias gbD='git branch -D'
 ## scripts
 alias cgo='~/cgo.sh'
 alias sy='~/sy.sh'
+alias fn='~/fn.sh'
 
 ## get top process eating memory
 alias mem5='ps auxf | sort -nr -k 4 | head -5'
