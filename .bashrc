@@ -55,3 +55,4 @@ if [ -f '/home/filip/google-cloud-sdk/path.bash.inc' ]; then . '/home/filip/goog
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/filip/google-cloud-sdk/completion.bash.inc' ]; then . '/home/filip/google-cloud-sdk/completion.bash.inc'; fi
+. "$HOME/.cargo/env"

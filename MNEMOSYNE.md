@@ -1,0 +1,2 @@
+- `yay -Sy visual-studio-code-bin` to update VS Code
+- `git pull` `makepkg -is` to update Chrome from the AUR in src
