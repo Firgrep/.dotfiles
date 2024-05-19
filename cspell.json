@@ -5,6 +5,7 @@
     "dictionaries": [],
     "words": [
         "DOTFILES",
+        "gsettings",
         "makepkg"
     ],
     "ignoreWords": [
