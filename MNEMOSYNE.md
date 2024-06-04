@@ -16,6 +16,13 @@ Cursor
 - `gsettings list-recursively | grep blink` find the actual variable concerning blinking cursor
 - `gsettings set org.gnome.desktop.interface cursor-blink false` Turn off blinking cursor in terminal
 
+### Network
+
+Block IPv6 on machine
+
+- `sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1` set to 0 to re-enable
+- to permanently edit, go to `/etc/sysctl.conf`
+
 ### Base64
 
 - `base64 -w 0 key.json > encoded_key.txt `
