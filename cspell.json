@@ -4,9 +4,16 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
+        "dbus",
         "DOTFILES",
+        "freedesktop",
         "gsettings",
-        "makepkg"
+        "makepkg",
+        "pacman",
+        "pmtu",
+        "resolvectl",
+        "tracepath",
+        "udev"
     ],
     "ignoreWords": [
         "cvsignore",
