@@ -5,6 +5,14 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+## hstr
+if [ -f /usr/bin/hstr ]; then
+    alias hh='hstr' # hh to be used instead of hstr
+    # Bind Ctrl-r to hstr
+    bind '"\C-r": "\C-a hstr -- \C-j"'
+    export HSTR_CONFIG=hicolor
+fi
+
 #=== ALIASES
 alias ..='cd ..'
 alias ..2='cd ../..'
