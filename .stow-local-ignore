@@ -18,10 +18,11 @@ CVS
 .+~ # emacs backup files
 \#.\*\# # emacs autosave files
 
-internal
-
 ^/README._
 ^/LICENSE._
 ^/COPYING
 LICENSE
-\*.md
+.*\.md$
+cspell.json
+
+internal
