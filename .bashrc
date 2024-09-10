@@ -36,6 +36,7 @@ alias gbD='git branch -D'
 alias cgo='~/cgo.sh'
 alias sy='~/sy.sh'
 alias fn='~/fn.sh'
+alias pipeline='~/pipeline.sh'
 
 ## get top process eating memory
 alias mem5='ps auxf | sort -nr -k 4 | head -5'

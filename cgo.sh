@@ -3,9 +3,9 @@
 # Four pane tmux session designed for frontend and backend development
 
 # Check if tmux is running
-if ! tmux has-session -t cgo 2>/dev/null; then
+if ! tmux has-session -t main 2>/dev/null; then
     # If tmux is not running, start it
-    tmux new-session -d -s cgo
+    tmux new-session -d -s main
 
     # Rename newly made window and split it into four panes
     tmux rename-window "cero"

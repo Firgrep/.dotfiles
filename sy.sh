@@ -2,7 +2,7 @@
 
 # Four pane tmux session designed for frontend and backend development
 
-SESSION="sy"
+SESSION="main"
 WINDOW="symposia"
 
 PATH1="~/dev/play"

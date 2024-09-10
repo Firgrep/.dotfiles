@@ -1,10 +1,10 @@
 #!/bin/bash
 
 SESSION="main"
-WINDOW="fn"
+WINDOW="pipeline"
 
-PATH1="~/dev/play"
-PATH2="~/dev/play/fn"
+PATH1="~/dev/work/data_pipeline"
+PATH2="~/dev/work/data_pipeline"
 PATH3=$PATH2
 PATH4=$PATH2
 
