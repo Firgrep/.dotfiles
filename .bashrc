@@ -61,6 +61,9 @@ export PATH=$BUN_INSTALL/bin:$PATH
 # stripe
 export PATH="$HOME/src/stripe:$PATH"
 
+# other local bin
+export PATH="$HOME/.local/bin:$PATH"
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/filip/google-cloud-sdk/path.bash.inc' ]; then . '/home/filip/google-cloud-sdk/path.bash.inc'; fi
 
@@ -70,4 +73,4 @@ if [ -f '/home/filip/google-cloud-sdk/completion.bash.inc' ]; then . '/home/fili
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completionexport PATH=$HOME/.local/bin:$PATH
