@@ -18,3 +18,4 @@ Fix:
   ```
 
 - `sudo systemctl restart bluetooth`
+- [more info](https://askubuntu.com/questions/676853/bluetooth-headset-with-poor-sound-quality-on-ubuntu)
