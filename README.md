@@ -14,5 +14,11 @@ Without a `.stow-local-ignore` file, `stow` will use [defaults](https://www.gnu.
 
 - install TPM `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - install plugins `prefix + I` [see](https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installing-plugins)
-- install xsel `$ sudo apt-get install xsel` 
-- reload terminals 
+- install xsel `$ sudo apt-get install xsel`
+- reload terminals
+
+### `atuin` better history search
+
+- run `bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)`
+- restart terminals
+- run `atuin import auto` (local syncing only, no cloud)
