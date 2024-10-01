@@ -31,6 +31,7 @@ alias rm='rm -v'
 ## git
 alias gbd='git branch -d'
 alias gbD='git branch -D'
+alias gsync='git pull --rebase && git push'
 
 ## scripts
 alias cgo='~/cgo.sh'
