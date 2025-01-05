@@ -80,3 +80,18 @@ export NVM_DIR="$HOME/.nvm"
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
+
+# pnpm
+export PNPM_HOME="/home/filip/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# cockroach
+export COCKROACH_INSTALL="/home/filip/cockroach"
+export PATH="$COCKROACH_INSTALL:$PATH"
+
+# zoxide
+eval "$(zoxide init bash)"

@@ -4,16 +4,26 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
+        "atuin",
+        "auxf",
+        "cksh",
+        "colrm",
+        "completionexport",
         "dbus",
         "DOTFILES",
+        "filip",
         "freedesktop",
         "gsettings",
+        "gsync",
+        "hstr",
         "makepkg",
         "pacman",
         "pmtu",
+        "preexec",
         "resolvectl",
         "tracepath",
-        "udev"
+        "udev",
+        "zoxide"
     ],
     "ignoreWords": [
         "cvsignore",
