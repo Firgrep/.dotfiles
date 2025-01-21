@@ -93,5 +93,8 @@ esac
 export COCKROACH_INSTALL="/home/filip/cockroach"
 export PATH="$COCKROACH_INSTALL:$PATH"
 
+# nvim
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
 # zoxide
 eval "$(zoxide init bash)"

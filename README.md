@@ -22,3 +22,8 @@ Without a `.stow-local-ignore` file, `stow` will use [defaults](https://www.gnu.
 - run `bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)`
 - restart terminals
 - run `atuin import auto` (local syncing only, no cloud)
+
+### `neovim` requirements
+
+- `sudo apt install ripgrep`
+- `sudo apt install fd-find`
