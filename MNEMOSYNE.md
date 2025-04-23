@@ -1,5 +1,11 @@
+### Arch
+
 - `yay -Sy visual-studio-code-bin` to update VS Code
 - `git pull` `makepkg -is` to update Chrome from the AUR in src
+
+### Ubuntu
+
+- `apt-get install --only-upgrade <package-name>` to _only_ upgrade a single pkg.
 
 ### GNOME
 

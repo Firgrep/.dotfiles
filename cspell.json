@@ -6,6 +6,7 @@
     "words": [
         "atuin",
         "auxf",
+        "cerebro",
         "cksh",
         "colrm",
         "completionexport",
@@ -17,10 +18,13 @@
         "gsync",
         "hstr",
         "makepkg",
+        "mdvh",
+        "medivh",
         "pacman",
         "pmtu",
         "preexec",
         "resolvectl",
+        "sphil",
         "tracepath",
         "udev",
         "zoxide"
