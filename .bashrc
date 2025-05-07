@@ -27,6 +27,7 @@ alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias stow='stow -v'
 alias rm='rm -v'
+alias br='bun run'
 
 ## git
 alias gitnew='git pull && git checkout -b'
