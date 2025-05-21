@@ -28,6 +28,7 @@ alias mv='mv -iv'
 alias stow='stow -v'
 alias rm='rm -v'
 alias br='bun run'
+alias backup="~/.dotfiles/backup.sh"
 
 ## git
 alias gitnew='git pull && git checkout -b'
