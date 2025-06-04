@@ -43,6 +43,14 @@ if ! tmux has-session -t $SESSION_ONE 2>/dev/null; then
     tmux new-window -t $SESSION_ONE -n types && \
     tmux send-keys 'cd ~/dev/work/cerebro-types' Enter && \
     tmux send-keys 'clear' Enter
+    
+    tmux new-window -t $SESSION_ONE -n wt-1 && \
+    tmux send-keys 'cd ~/dev/work/watchtower' Enter && \
+    tmux send-keys 'clear' Enter
+
+    tmux new-window -t $SESSION_ONE -n wt-2 && \
+    tmux send-keys 'cd ~/dev/work/watchtower' Enter && \
+    tmux send-keys 'clear' Enter
 
 else 
     echo "Session '$SESSION_ONE' already exists"

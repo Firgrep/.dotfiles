@@ -34,9 +34,23 @@
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
+  "[typescript]": {
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["k", "j"],
+        "after": ["<Esc>"]
+      },
+      {
+        "before": ["`"],
+        "after": ["`", "<Delete>"]
+      }
+    ]
+  },
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
   "vim.statusBarColorControl": true,
   "vim.statusBarColors": {
     "normal": "#005f5f",
@@ -48,7 +62,9 @@
   "vim.handleKeys": {
     "<C-p>": false,
     "<A-Up>": false,
-    "<A-Down>": false
+    "<A-Down>": false,
+    "<C-a>": false,
+    "<C-c>": false
   },
   "vim.insertModeKeyBindings": [
     {
@@ -57,9 +73,9 @@
     }
   ],
   "workbench.colorCustomizations": {
-    "statusBar.background": "#5f0000",
-    "statusBar.noFolderBackground": "#5f0000",
-    "statusBar.debuggingBackground": "#5f0000",
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f",
     "statusBar.foreground": "#ffffff",
     "statusBar.debuggingForeground": "#ffffff"
   }
