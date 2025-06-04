@@ -102,5 +102,8 @@ export PATH="$COCKROACH_INSTALL:$PATH"
 # nvim
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
+# bin
+export PATH="$HOME/.bin:$PATH"
+
 # zoxide
 eval "$(zoxide init bash)"
