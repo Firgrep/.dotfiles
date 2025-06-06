@@ -1,6 +1,6 @@
 {
   "workbench.iconTheme": "vscode-icons",
-  "editor.cursorStyle": "block",
+  "editor.cursorStyle": "block-outline",
   "editor.cursorBlinking": "solid",
   "editor.renderWhitespace": "trailing",
   "workbench.startupEditor": "none",
@@ -58,7 +58,8 @@
     "visual": "#5f005f",
     "replace": "#5f5f00"
   },
-  "vim.cursorStylePerMode.insert": "block-outline",
+  "vim.cursorStylePerMode.normal": "block-outline",
+  "vim.cursorStylePerMode.insert": "block",
   "vim.handleKeys": {
     "<C-p>": false,
     "<A-Up>": false,
