@@ -68,5 +68,15 @@
     "key": "alt+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
+  },
+  {
+    "key": "alt+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "!suggestWidgetHasFocusedSuggestion && editorTextFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "!suggestWidgetHasFocusedSuggestion && editorTextFocus"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "workbench.iconTheme": "vscode-icons",
-  "editor.cursorStyle": "block-outline",
+  "editor.cursorStyle": "block",
   "editor.cursorBlinking": "solid",
   "editor.renderWhitespace": "trailing",
   "workbench.startupEditor": "none",
@@ -73,11 +73,13 @@
       "after": ["<Esc>"]
     }
   ],
-  "workbench.colorCustomizations": {
-    "statusBar.background": "#005f5f",
-    "statusBar.noFolderBackground": "#005f5f",
-    "statusBar.debuggingBackground": "#005f5f",
-    "statusBar.foreground": "#ffffff",
-    "statusBar.debuggingForeground": "#ffffff"
-  }
+  // "workbench.colorCustomizations": {
+  //   "statusBar.background": "#5f0000",
+  //   "statusBar.noFolderBackground": "#5f0000",
+  //   "statusBar.debuggingBackground": "#5f0000",
+  //   "statusBar.foreground": "#ffffff",
+  //   "statusBar.debuggingForeground": "#ffffff"
+  // },
+  "rust-analyzer.check.command": "clippy",
+  "docker.extension.enableComposeLanguageServer": false
 }

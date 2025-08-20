@@ -29,6 +29,7 @@ alias stow='stow -v'
 alias rm='rm -v'
 alias br='bun run'
 alias backup="~/.dotfiles/backup.sh"
+alias here="xdg-open . &"
 
 ## git
 alias gitnew='git pull && git checkout -b'
