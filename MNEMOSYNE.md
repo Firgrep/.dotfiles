@@ -32,3 +32,8 @@ Block IPv6 on machine
 ### Base64
 
 - `base64 -w 0 key.json > encoded_key.txt `
+
+### Fonts
+
+- `sudo mkdir /usr/local/share/fonts/NEW_FONT`
+- `sudo mv ~/Downloads/NEW_FONT/*.ttf /usr/local/share/fonts/NEW_FONT`
