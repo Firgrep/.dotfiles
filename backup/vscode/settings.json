@@ -81,5 +81,23 @@
   //   "statusBar.debuggingForeground": "#ffffff"
   // },
   "rust-analyzer.check.command": "clippy",
-  "docker.extension.enableComposeLanguageServer": false
+  "docker.extension.enableComposeLanguageServer": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "update.mode": "none",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "typescript.tsserver.log": "off",
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }

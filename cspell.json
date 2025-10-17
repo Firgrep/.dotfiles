@@ -19,6 +19,7 @@
         "gsettings",
         "gsync",
         "hstr",
+        "kotlinc",
         "lazygit",
         "makepkg",
         "mdvh",

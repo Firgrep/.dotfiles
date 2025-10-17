@@ -106,5 +106,8 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 # bin
 export PATH="$HOME/.bin:$PATH"
 
+# kotlin
+export PATH="$PATH:$HOME/kotlinc/bin"
+
 # zoxide
 eval "$(zoxide init bash)"
