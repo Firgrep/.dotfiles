@@ -99,5 +99,7 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "prettify-ts.maxDepth": 5,
+  "prettify-ts.maxSubProperties": 100
 }
