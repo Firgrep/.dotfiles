@@ -40,6 +40,9 @@ alias gsync='git pull --rebase && git push'
 ## lazygit
 alias lg='lazygit'
 
+# pnpm
+alias pn='pnpm'
+
 ## scripts
 alias cgo='~/cgo.sh'
 alias sy='~/sy.sh'
