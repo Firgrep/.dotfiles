@@ -100,5 +100,36 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "biome.suggestInstallingGlobally": false,
+  "editor.aiStats.enabled": false,
+  "chat.disableAIFeatures": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://biomejs.dev": true,
+    "https://turborepo.dev": true,
+    "https://turbo.build": true
+  },
+  "explorer.confirmPasteNative": false,
+  "vsicons.associations.folders": [
+      {
+          "icon": "prisma",
+          "extensions": ["prismarine"],
+          "format": "svg"
+      },
+      {
+          "icon": "typescript",
+          "extensions": ["tsconfig"],
+          "format": "svg"
+      },
+      {
+          "icon": "gcp",
+          "extensions": ["lb-ctl"],
+          "format": "svg"
+      }
+  ]
 }
