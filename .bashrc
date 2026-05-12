@@ -30,6 +30,7 @@ alias rm='rm -v'
 alias br='bun run'
 alias backup="~/.dotfiles/backup.sh"
 alias here="xdg-open . &"
+e() { code "${1:-.}"; }
 
 ## git
 alias gitnew='git pull && git checkout -b'
