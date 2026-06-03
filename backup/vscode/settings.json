@@ -16,38 +16,38 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false,
-    "mdx": false
+    "mdx": false,
   },
   "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
+    "editor.defaultFormatter": "Prisma.prisma",
   },
   "explorer.confirmDragAndDrop": false,
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
   },
   "accessibility.verbosity.inlineChat": false,
   "inlineChat.lineNaturalLanguageHint": false,
   "[bibtex]": {
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
+    "editor.defaultFormatter": "James-Yu.latex-workshop",
   },
   "workbench.sideBar.location": "right",
   "[java]": {
-    "editor.defaultFormatter": "redhat.java"
+    "editor.defaultFormatter": "redhat.java",
   },
   "[typescript]": {
     "vim.insertModeKeyBindings": [
       {
         "before": ["k", "j"],
-        "after": ["<Esc>"]
+        "after": ["<Esc>"],
       },
       {
         "before": ["`"],
-        "after": ["`", "<Delete>"]
-      }
-    ]
+        "after": ["`", "<Delete>"],
+      },
+    ],
   },
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
+    "asvetliakov.vscode-neovim": 1,
   },
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.codeLens.authors.enabled": false,
@@ -56,7 +56,7 @@
     "normal": "#005f5f",
     "insert": "#5f0000",
     "visual": "#5f005f",
-    "replace": "#5f5f00"
+    "replace": "#5f5f00",
   },
   "vim.cursorStylePerMode.normal": "block-outline",
   "vim.cursorStylePerMode.insert": "block",
@@ -65,13 +65,13 @@
     "<A-Up>": false,
     "<A-Down>": false,
     "<C-a>": false,
-    "<C-c>": false
+    "<C-c>": false,
   },
   "vim.insertModeKeyBindings": [
     {
       "before": ["k", "j"],
-      "after": ["<Esc>"]
-    }
+      "after": ["<Esc>"],
+    },
   ],
   // "workbench.colorCustomizations": {
   //   "statusBar.background": "#5f0000",
@@ -93,12 +93,12 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true
+      "strings": true,
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "git.openRepositoryInParentFolders": "never",
   "biome.suggestInstallingGlobally": false,
@@ -112,24 +112,46 @@
     "https://json-schema.org/": true,
     "https://biomejs.dev": true,
     "https://turborepo.dev": true,
-    "https://turbo.build": true
+    "https://turbo.build": true,
   },
   "explorer.confirmPasteNative": false,
   "vsicons.associations.folders": [
-      {
-          "icon": "prisma",
-          "extensions": ["prismarine"],
-          "format": "svg"
-      },
-      {
-          "icon": "typescript",
-          "extensions": ["tsconfig"],
-          "format": "svg"
-      },
-      {
-          "icon": "gcp",
-          "extensions": ["lb-ctl"],
-          "format": "svg"
-      }
-  ]
+    {
+      "icon": "prisma",
+      "extensions": ["prismarine"],
+      "format": "svg",
+    },
+    {
+      "icon": "typescript",
+      "extensions": ["tsconfig"],
+      "format": "svg",
+    },
+    {
+      "icon": "gcp",
+      "extensions": ["lb-ctl"],
+      "format": "svg",
+    },
+    {
+      "icon": "server",
+      "extensions": ["infra"],
+      "format": "svg",
+    },
+    {
+      "icon": "shared",
+      "extensions": ["system"],
+      "format": "svg",
+    },
+    {
+      "icon": "blueprint",
+      "extensions": ["core"],
+      "format": "svg",
+    },
+    {
+      "icon": "frontcommerce",
+      "extensions": ["internal"],
+      "format": "svg",
+    },
+  ],
+  "makefile.configureOnOpen": false,
+  "docker.lsp.experimental.scout.criticalHighVulnerabilities": false,
 }

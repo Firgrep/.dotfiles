@@ -115,3 +115,7 @@ export PATH="$PATH:$HOME/kotlinc/bin"
 
 # zoxide
 eval "$(zoxide init bash)"
+
+# Added by Antigravity CLI installer
+export PATH="/home/filip/.local/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
