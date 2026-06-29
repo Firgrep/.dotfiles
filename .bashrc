@@ -119,3 +119,13 @@ eval "$(zoxide init bash)"
 # Added by Antigravity CLI installer
 export PATH="/home/filip/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+
+# Shortcut to run a program in a specific sway workspace
+ww() {
+    local ws="$1"
+    shift
+    swaymsg workspace "$ws"
+    if [ $# -gt 0 ]; then
+        "$@"
+    fi
+}
