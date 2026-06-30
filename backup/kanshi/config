@@ -1,0 +1,17 @@
+# Profile 1: Laptop only
+profile laptop_only {
+    output eDP-1 enable
+}
+
+# Profile 2: Home Desk Setup
+profile home_setup {
+    output "ASUSTek COMPUTER INC VG34VQL3A T6LMDW000119" mode 3440x1440 position 0,0
+    output eDP-1 mode 1920x1200 position 836,1440
+}
+
+# Profile 3: Office Desk Setup
+profile office_setup {
+    output eDP-1 mode 1920x1200 position 2560,1440
+    output "Philips Consumer Electronics Company 34M1C5500VA UK02336043024" mode 3440x1440 position 2560,0
+    output "Lenovo Group Limited G27q-30 UMB5TVWF" mode 2560x1440 position 0,0 
+}

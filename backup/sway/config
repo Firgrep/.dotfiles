@@ -23,7 +23,8 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show run
+#set $menu wofi --show run
+set $menu fuzzel
 
 include /etc/sway/config-vars.d/*
 
@@ -78,7 +79,7 @@ input "type:touchpad" {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -103,7 +104,7 @@ input "type:touchpad" {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Ctrl+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Manual lock screen shortcut (Super + L)
     bindsym $mod+Shift+x exec swaylock -f -c 000000
@@ -123,7 +124,10 @@ input "type:touchpad" {
     bindsym $mod+Shift+p mode $mode_power
 
     # Screenshots
-    bindsym Print exec grim -g "$(slurp)" -t ppm - | $HOME/.cargo/bin/satty --filename - --fullscreen --auto-copy --output-filename "/home/filip/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png" --early-exit save
+    bindsym Print exec grim -g "$(slurp)" -t ppm - | $HOME/.cargo/bin/satty --filename - --fullscreen --copy-command=wl-copy --output-filename "/home/filip/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png" --disable-notifications --save-after-copy --early-exit copy save 
+
+    # Emoji
+    bindsym $mod+e exec sh -c 'export PATH="$HOME/.local/bin:$PATH"; BEMOJI_PICKER_CMD="fuzzel -d" bemoji -c'
 #
 # Moving around:
 #
@@ -193,7 +197,7 @@ input "type:touchpad" {
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    bindsym $mod+Shift+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -251,6 +255,7 @@ bar {
     swaybar_command waybar
 }
 
+
 # Don't Lock During Fullscreen Videos
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
@@ -260,3 +265,8 @@ exec mako
 
 include /etc/sway/config.d/*
 exec_always "pkill kanshi; kanshi &"
+
+# Border window config
+default_border pixel 2
+default_floating_border pixel 2
+for_window [title=".*"] border pixel 2
