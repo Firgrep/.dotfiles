@@ -128,6 +128,12 @@ input "type:touchpad" {
 
     # Emoji
     bindsym $mod+e exec sh -c 'export PATH="$HOME/.local/bin:$PATH"; BEMOJI_PICKER_CMD="fuzzel -d" bemoji -c'
+    
+    # Find files
+    bindsym $mod+f exec sh -c 'fdfind . "$HOME/Documents" "$HOME/Downloads" "$HOME/Videos" "$HOME/Pictures" "$HOME/Dropbox" | fuzzel -d --prompt="Find: " | xargs -r -d "\n" xdg-open'
+
+    # Program shortcuts
+    bindsym $mod+c exec google-chrome-stable
 #
 # Moving around:
 #
@@ -200,7 +206,7 @@ input "type:touchpad" {
     bindsym $mod+Shift+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+Shift+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle

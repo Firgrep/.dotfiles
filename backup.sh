@@ -8,3 +8,5 @@ cd "$DOTFILES_DIR"
 ./scripts/backup-sway.sh
 ./scripts/backup-waybar.sh
 ./scripts/backup-kanshi.sh
+./scripts/backup-alacritty.sh
+./scripts/backup-fuzzel.sh
