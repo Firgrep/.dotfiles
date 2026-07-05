@@ -51,6 +51,7 @@ exec /usr/local/bin/auto-power-profile
 ### Input configuration
 input "type:keyboard" {
     xkb_layout "no"
+    xkb_numlock enabled
 }
 input "type:touchpad" {
     dwt enabled
@@ -186,6 +187,14 @@ input "type:touchpad" {
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
+    # Toggle between current and previous workspace
+    workspace_auto_back_and_forth yes
+    bindsym $mod+Tab workspace back_and_forth
+
+    # Three-finger swipe to switch workspace
+    bindgesture swipe:3:right workspace prev
+    bindgesture swipe:3:left workspace next
+
     # Move workspaces to windows
     bindsym $mod+Ctrl+h move workspace to output left
     bindsym $mod+Ctrl+l move workspace to output right
@@ -228,6 +237,10 @@ input "type:touchpad" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+    # Dropdown terminal: $mod+u toggles it, launching it first if needed
+    for_window [app_id="dropterm"] floating enable, resize set 60 ppt 60 ppt, move position center, move scratchpad, scratchpad show
+    bindsym $mod+u exec swaymsg '[app_id="dropterm"] scratchpad show' || alacritty --class dropterm
 #
 # Resizing containers:
 #
@@ -276,3 +289,7 @@ exec_always "pkill kanshi; kanshi &"
 default_border pixel 2
 default_floating_border pixel 2
 for_window [title=".*"] border pixel 2
+smart_borders on
+
+# Picture-in-picture: float, follow across workspaces
+for_window [title="^Picture.in.[Pp]icture$"] floating enable, sticky enable, border none
