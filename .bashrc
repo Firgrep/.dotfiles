@@ -120,12 +120,33 @@ eval "$(zoxide init bash)"
 export PATH="/home/filip/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 
-# Shortcut to run a program in a specific sway workspace
+# Shortcut to run a program in a specific sway workspace.
+#   ww 2 code .          -> workspace 2 (wherever it lives), launch
+#   ww up 2 code .       -> workspace 2, moved to the output above, launch
+#   ww up code .         -> fresh workspace on the output above, launch
+#   ww code .            -> fresh workspace on the current output, launch
 ww() {
-    local ws="$1"
-    shift
+    local dir="" ws
+    case "$1" in
+        up|down|left|right) dir="$1"; shift ;;
+    esac
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        ws="$1"
+        shift
+    else
+        ws=$(ws_free)
+    fi
     swaymsg workspace "$ws"
+    [ -n "$dir" ] && swaymsg move workspace to output "$dir"
     if [ $# -gt 0 ]; then
         "$@"
     fi
+}
+
+# Lowest unused numbered sway workspace, e.g. ww up "$(ws_free)" code .
+ws_free() {
+    local used n=1
+    used=$(swaymsg -t get_workspaces | jq '[.[].num]')
+    while echo "$used" | jq -e "index($n)" >/dev/null; do n=$((n + 1)); done
+    echo "$n"
 }
