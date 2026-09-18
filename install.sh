@@ -38,3 +38,12 @@ curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/downl
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t /usr/local/bin/
 rm lazygit.tar.gz lazygit
+
+# fzf, from GitHub releases: the apt package is too old for `fzf --bash`
+# (added in 0.48), which .bashrc uses. Installs to ~/.local/bin, which comes
+# before /usr/bin on PATH, so this wins over any apt fzf.
+FZF_VERSION=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz"
+tar xf fzf.tar.gz fzf
+install -D -t ~/.local/bin fzf
+rm fzf.tar.gz fzf
