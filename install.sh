@@ -1,5 +1,20 @@
 sudo apt update && sudo apt install xclip
 
+# Neovim, pinned to a known-good version rather than whatever the distro's
+# apt repo happens to carry (older Ubuntu releases ship Neovim versions far
+# too old for AstroNvim). Installs to /opt/nvim-linux64 (matches the PATH
+# entry already in .bashrc) and symlinks into /usr/local/bin, which comes
+# before /usr/bin on PATH, so this wins even if a distro neovim package is
+# also present.
+NVIM_VERSION="v0.11.6"
+curl -Lo /tmp/nvim-linux-x86_64.tar.gz "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux-x86_64.tar.gz"
+sudo rm -rf /opt/nvim-linux64
+sudo tar -C /opt -xzf /tmp/nvim-linux-x86_64.tar.gz
+sudo mv /opt/nvim-linux-x86_64 /opt/nvim-linux64
+sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
+rm /tmp/nvim-linux-x86_64.tar.gz
+nvim --version | head -1
+
 # AstroNvim requirements
 sudo apt install -y \
   build-essential \
