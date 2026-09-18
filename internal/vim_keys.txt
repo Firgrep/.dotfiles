@@ -1,0 +1,27 @@
+VIM KEYS
+
+NORMAL MODE
+    MOVEMENT
+    w / W    move forward to start of next word / skip punctuations etc.
+    e / E     jump to the end of the next word / skip punctuations etc.
+    ctrl+d    scroll down half page
+    ctrl+u     scroll up half page
+    { / }    jump to next / previous blank line
+    gg / G    jump to first / last line
+
+    ACTION
+    dd    delete line
+    dw     delete from cursor to the start of next word
+
+    SEARCH
+    /<pattern>     then Enter
+    n / N         jump to next / previous match
+
+    SUBSYSTEM
+    <leader> f    Open telescope finder options
+        f        Find files
+        w        Find words (grep)
+        ctrl+j / k    Scroll up and down results
+
+INSERT MODE
+ctrl+w     delete word before cursor
