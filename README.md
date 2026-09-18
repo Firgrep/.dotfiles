@@ -4,7 +4,7 @@ The start of a dotty journey.
 
 Feel welcome to copy!
 
-`stow .` to populate symlinks.
+`make stow` to populate symlinks.
 
 ### `stow` defaults
 
