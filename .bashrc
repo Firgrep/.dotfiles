@@ -15,6 +15,8 @@ fi
 
 #=== ALIASES
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 alias c='clear'
@@ -30,7 +32,31 @@ alias rm='rm -v'
 alias br='bun run'
 alias backup="~/.dotfiles/backup.sh"
 alias here="xdg-open . &"
+alias k9s='~/dev/tools/k9s/execs/k9s'
+alias claude='claude --permission-mode auto'
+alias wm='workmux'
+alias k=kubectl
+alias ktest="kubectl --context=happi-aks-test"
+alias kprod="kubectl --context=happi-aks-prod"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias op-fable="opencode -m github-copilot/claude-fable-5"
+alias op-opus="opencode -m github-copilot/claude-opus-5"
+alias op-sonnet="opencode -m github-copilot/claude-sonnet-5"
+alias op-terra="opencode -m github-copilot/gpt-5.6-terra"
+alias op-sol="opencode -m github-copilot/gpt-5.6-sol"
+alias op-luna="opencode -m github-copilot/gpt-5.6-luna"
+alias op-flash="opencode -m github-copilot/gemini-3.8-flash"
+
 e() { code "${1:-.}"; }
+
+v() {
+  if [ $# -eq 0 ]; then
+    nvim .
+  else
+    nvim "$@"
+  fi
+}
 
 ## git
 alias gitnew='git pull && git checkout -b'
@@ -53,17 +79,33 @@ alias pipeline='~/pipeline.sh'
 ## get top process eating memory
 alias mem5='ps auxf | sort -nr -k 4 | head -5'
 alias mem10='ps auxf | sort -nr -k 4 | head -10'
- 
+
 ## get top process eating cpu ##
 alias cpu5='ps auxf | sort -nr -k 3 | head -5'
 alias cpu10='ps auxf | sort -nr -k 3 | head -10'
- 
+
 ## List largest directories (aka "ducks")
 alias dir5='du -cksh * | sort -hr | head -n 5'
 alias dir10='du -cksh * | sort -hr | head -n 10'
 
 #=== PROMPT
-PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '\''*'\'' | colrm 1 2); PS1="\[\e[90m\][\$(date +'%H:%M')]\[\e[36m\]\[\e[35m\]\u\[\e[0m\]:\[\e[36m\]\w"; if [ -n "$PS1_CMD1" ]; then PS1+="\[\e[0;94m\][${PS1_CMD1}]"; fi; PS1+="\[\e[0m\]\\$ "'
+# always know the kubectl context before writing changes to prod unknowingly
+__kube_context_prompt() {
+    local context reset='\[\e[0m\]'
+    local matrix='\[\e[92m\]'     # neon matrix green
+    local prod_hl='\[\e[97;41m\]' # white on red, for "prod" only
+
+    context=$(kubectl config current-context 2>/dev/null) || return
+
+    local display="$context"
+    if [[ "$context" == *prod* ]]; then
+        display="${context//prod/${prod_hl}prod${reset}${matrix}}"
+    fi
+
+    printf '%s[⎈ %s]%s' "$matrix" "$display" "$reset"
+}
+
+PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '\''*'\'' | colrm 1 2); PS1="\[\e[90m\][\$(date +'\''%H:%M'\'')]\[\e[36m\]\[\e[35m\]\u\[\e[0m\]:\[\e[36m\]\w"; if [ -n "$PS1_CMD1" ]; then PS1+="\[\e[0;94m\][${PS1_CMD1}]"; fi; PS1_CMD2=$(__kube_context_prompt); if [ -n "$PS1_CMD2" ]; then PS1+="${PS1_CMD2}"; fi; PS1+="\[\e[0m\]\\$ "'
 
 #=== OTHER
 # bun
@@ -81,22 +123,37 @@ if [ -f '/home/filip/google-cloud-sdk/path.bash.inc' ]; then . '/home/filip/goog
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/filip/google-cloud-sdk/completion.bash.inc' ]; then . '/home/filip/google-cloud-sdk/completion.bash.inc'; fi
+
+# go
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# cargo
 . "$HOME/.cargo/env"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completionexport PATH=$HOME/.local/bin:$PATH
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 . "$HOME/.atuin/bin/env"
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
 
+eval "$(fzf --bash)"
+
+complete -C /usr/bin/terraform terraform
+
+# opencode
+export PATH=/home/filip/.opencode/bin:$PATH
+
 # pnpm
 export PNPM_HOME="/home/filip/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
 
@@ -115,10 +172,6 @@ export PATH="$PATH:$HOME/kotlinc/bin"
 
 # zoxide
 eval "$(zoxide init bash)"
-
-# Added by Antigravity CLI installer
-export PATH="/home/filip/.local/bin:$PATH"
-export PATH=$PATH:/usr/local/go/bin
 
 # Shortcut to run a program in a specific sway workspace.
 #   ww 2 code .          -> workspace 2 (wherever it lives), launch
