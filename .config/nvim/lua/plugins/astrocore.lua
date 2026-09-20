@@ -124,8 +124,10 @@ return {
         ["<A-j>"] = { ":m .+1<CR>==", desc = "Move line down" },
         ["<A-k>"] = { ":m .-2<CR>==", desc = "Move line up" },
 
-        -- jump out of the current { } block and open a line below it
-        ["<C-l>"] = { exit_brace_below, desc = "Exit block, new line below" },
+        -- jump out of the current { } block and open a line below it.
+        -- <A-o> rather than <C-l>: <C-l> is smart-splits' "move to right
+        -- split", which tmux also forwards here for seamless pane navigation.
+        ["<A-o>"] = { exit_brace_below, desc = "Exit block, new line below" },
       },
       v = {
         -- move selected lines up/down, keeping the selection and reindenting
@@ -138,7 +140,7 @@ return {
         ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", desc = "Move line up" },
 
         -- jump out of the current { } block and open a line below it
-        ["<C-l>"] = { exit_brace_below_keys, expr = true, desc = "Exit block, new line below" },
+        ["<A-o>"] = { exit_brace_below_keys, expr = true, desc = "Exit block, new line below" },
 
         -- save without leaving insert mode (AstroNvim's default <C-S> is
         -- normal/visual mode only)
