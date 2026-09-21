@@ -64,8 +64,9 @@ alias gbd='git branch -d'
 alias gbD='git branch -D'
 alias gsync='git pull --rebase && git push'
 
-## lazygit
+## lazy
 alias lg='lazygit'
+alias ld='lazydocker'
 
 # pnpm
 alias pn='pnpm'
