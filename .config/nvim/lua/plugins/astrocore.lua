@@ -40,8 +40,12 @@ local function exit_brace_below_keys()
     jump = "]}"
   end
   local indent = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]:match "^%s*"
-  -- <C-u> clears whatever indent `o` auto-inserts before typing our own
-  return "<Esc>" .. jump .. "o<C-u>" .. indent
+  -- <C-u> clears whatever indent `o` auto-inserts before typing our own.
+  -- Typing a throwaway space first guarantees <C-u> always has something
+  -- newly-typed to delete: on a truly empty line (closing brace at column
+  -- 0, so no auto-indent at all) it otherwise falls back to 'backspace'
+  -- eol-joining, deleting the new line itself instead of clearing nothing.
+  return "<Esc>" .. jump .. "o <C-u>" .. indent
 end
 
 ---@type LazySpec
