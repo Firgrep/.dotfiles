@@ -106,6 +106,8 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["<Tab>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["<S-Tab>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
@@ -137,6 +139,11 @@ return {
         -- move selected lines up/down, keeping the selection and reindenting
         ["<A-j>"] = { ":m '>+1<CR>gv=gv", desc = "Move selection down" },
         ["<A-k>"] = { ":m '<-2<CR>gv=gv", desc = "Move selection up" },
+      },
+      x = {
+        -- paste over selection without clobbering the unnamed register
+        -- (deletes the selection into the black hole register first)
+        ["p"] = { '"_dP', desc = "Paste without yanking selection" },
       },
       i = {
         -- move current line up/down without leaving insert mode
