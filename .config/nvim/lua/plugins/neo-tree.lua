@@ -8,5 +8,13 @@ return {
         hide_dotfiles = false,
       },
     },
+    window = {
+      mappings = {
+        ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
+        ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
+        ["<C-f>"] = false,
+        ["<C-b>"] = false,
+      },
+    },
   },
 }
