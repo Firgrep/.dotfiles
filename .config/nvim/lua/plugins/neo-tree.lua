@@ -9,6 +9,7 @@ return {
       },
     },
     window = {
+      position = "right",
       mappings = {
         ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
         ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
