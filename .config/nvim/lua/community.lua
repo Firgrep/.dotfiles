@@ -5,6 +5,7 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
+  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.biome" },
   { import = "astrocommunity.scrolling.satellite-nvim" },
