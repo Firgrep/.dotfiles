@@ -1,3 +1,6 @@
+[keyboard]
+bindings = [{ key = "Back", mods = "Control", chars = "\u0017" }]
+
 [colors.primary]
 background = '#1c1c1c'
 foreground = '#e4e4e4'
@@ -21,3 +24,4 @@ blue = '#64b5f6'
 magenta = '#df99ff'
 cyan = '#66faff'
 white = '#ffffff'
+
