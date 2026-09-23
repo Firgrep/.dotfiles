@@ -63,6 +63,17 @@ return {
           -- plain string color. Clearing it lets Treesitter's finer-grained
           -- highlighting inside the string stay visible.
           ["@lsp.type.string"] = {},
+          -- The theme rainbows markdown headings by level (h1=blue,
+          -- h2=orange, h3=yellow, h4=green, h5=blue, h6=pink). Make every
+          -- level blue instead; inline code inside a heading is a separate
+          -- injected-language capture (`@markup.raw.markdown_inline`, left
+          -- untouched) so it keeps its own orange.
+          ["@markup.heading.1.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          ["@markup.heading.2.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          ["@markup.heading.3.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          ["@markup.heading.4.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          ["@markup.heading.5.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          ["@markup.heading.6.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
         }
       end,
     },
