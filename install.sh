@@ -22,11 +22,14 @@ sudo apt install -y \
   ripgrep \
   fd-find \
   python3-pip \
-  python3-venv
+  python3-venv \
+  libicu78
 # build-essential: compiles treesitter parsers
 # unzip: several Mason-installed tools (stylua, selene, terraform-ls, tflint, ...) ship as .zip
 # ripgrep, fd-find: used by pickers/live-grep
 # python3-pip, python3-venv: Mason installs Python-based tools (e.g. nginx-config-formatter) into their own venv
+# libicu78: marksman (Markdown LSP) is a .NET binary that aborts (SIGABRT) on
+# startup without an ICU package installed on the system
 
 # Debian/Ubuntu installs fd-find's binary as `fdfind`, not `fd` (the name `fd`
 # was already taken in their archive), so symlink it to the name most tools expect
