@@ -66,6 +66,28 @@ return {
     -- as the working directory, so the statusline's relative filename is
     -- always relative to the project root rather than wherever nvim launched
     rooter = { autochdir = true },
+    autocmds = {
+      cleanup_empty_buffers = {
+        {
+          event = "BufEnter",
+          desc = "Delete stray empty, unnamed, unmodified buffers left behind when navigating away "
+            .. "from them (e.g. Neovim's initial buffer, or ones neo-tree's preview briefly touches)",
+          callback = function(args)
+            for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+              if
+                bufnr ~= args.buf
+                and vim.bo[bufnr].buflisted
+                and vim.bo[bufnr].buftype == ""
+                and vim.api.nvim_buf_get_name(bufnr) == ""
+                and not vim.bo[bufnr].modified
+              then
+                vim.api.nvim_buf_delete(bufnr, { force = true })
+              end
+            end
+          end,
+        },
+      },
+    },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
       virtual_text = true,
