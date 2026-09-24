@@ -62,6 +62,10 @@ return {
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
+    -- automatically track the project root (nearest .git, or LSP workspace)
+    -- as the working directory, so the statusline's relative filename is
+    -- always relative to the project root rather than wherever nvim launched
+    rooter = { autochdir = true },
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
       virtual_text = true,
