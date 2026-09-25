@@ -4,6 +4,24 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local function tabline_git_hl(bufnr)
+  local path = vim.api.nvim_buf_get_name(bufnr)
+  if path == "" then return end
+  local ok, git = pcall(require, "neo-tree.git")
+  if not ok then return end
+  local code = git.find_existing_status_code(path)
+  if not code then return end
+  local group
+  if code:sub(1, 1) == "?" or code:find "A" then
+    group = "NeoTreeGitUntracked"
+  elseif code:find "M" then
+    group = "NeoTreeGitModified"
+  end
+  if not group then return end
+  local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+  return hl.fg and { fg = string.format("#%06x", hl.fg) } or nil
+end
+
 ---@type LazySpec
 return {
   "AstroNvim/astroui",
@@ -77,6 +95,16 @@ return {
           NeoTreeGitUntracked = { fg = colors.vscGitUntracked, bg = "NONE", italic = true },
         }
       end,
+    },
+    status = {
+      components = {
+        tabline_file_info = {
+          filename = {
+            hl = function(self) return tabline_git_hl(self.bufnr) end,
+            update = { "BufEnter", "BufWritePost", "User", pattern = "GitSignsUpdate" },
+          },
+        },
+      },
     },
     -- Icons can be configured throughout the interface
     icons = {
