@@ -74,6 +74,7 @@ return {
           ["@markup.heading.4.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
           ["@markup.heading.5.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
           ["@markup.heading.6.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
+          NeoTreeGitUntracked = { fg = colors.vscGitUntracked, bg = "NONE", italic = true },
         }
       end,
     },
