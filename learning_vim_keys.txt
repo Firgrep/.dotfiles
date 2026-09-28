@@ -36,6 +36,8 @@ NORMAL MODE
 	<leader> l	Language tools
 		R	        Search References
 
+	<leader> gg	Lazygit
+
 
 INSERT MODE
 ctrl+w 	delete word before cursor
