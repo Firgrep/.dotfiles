@@ -93,6 +93,8 @@ return {
           ["@markup.heading.5.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
           ["@markup.heading.6.markdown"] = { fg = colors.vscBlue, bg = "NONE", bold = true },
           NeoTreeGitUntracked = { fg = colors.vscGitUntracked, bg = "NONE", italic = true },
+          -- Staged-new files: match the tabline green (which uses the untracked color for "A" too)
+          NeoTreeGitAdded = { fg = colors.vscGitUntracked, bg = "NONE" },
         }
       end,
     },
