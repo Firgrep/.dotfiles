@@ -16,11 +16,12 @@ NORMAL MODE
 		7yy		    yank 7 lines down
 		
 	ACTION
-	dd	    delete line
-	dw 	    delete from cursor to the start of next word
-	u	    undo last change
-	Ctrl+r	redo (undo the undo)
-	K	    show inline documentation
+	dd	    	delete line
+	dw 	    	delete from cursor to the start of next word
+	u	    	undo last change
+	Ctrl+r		redo (undo the undo)
+	K		show inline documentation
+	grn		rename (scope-aware, LSP supported)
 
 	SEARCH
 	/<pattern> 	then Enter
