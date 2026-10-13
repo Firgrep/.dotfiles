@@ -7,10 +7,10 @@
 
 ## hstr
 if [ -f /usr/bin/hstr ]; then
-    alias hh='hstr' # hh to be used instead of hstr
-    # Bind Ctrl-r to hstr
-    bind '"\C-r": "\C-a hstr -- \C-j"'
-    export HSTR_CONFIG=hicolor
+	alias hh='hstr' # hh to be used instead of hstr
+	# Bind Ctrl-r to hstr
+	bind '"\C-r": "\C-a hstr -- \C-j"'
+	export HSTR_CONFIG=hicolor
 fi
 
 #=== ALIASES
@@ -51,11 +51,11 @@ alias op-flash="opencode -m github-copilot/gemini-3.8-flash"
 e() { code "${1:-.}"; }
 
 v() {
-  if [ $# -eq 0 ]; then
-    nvim .
-  else
-    nvim "$@"
-  fi
+	if [ $# -eq 0 ]; then
+		nvim .
+	else
+		nvim "$@"
+	fi
 }
 
 ## git
@@ -92,18 +92,18 @@ alias dir10='du -cksh * | sort -hr | head -n 10'
 #=== PROMPT
 # always know the kubectl context before writing changes to prod unknowingly
 __kube_context_prompt() {
-    local context reset='\[\e[0m\]'
-    local matrix='\[\e[92m\]'     # neon matrix green
-    local prod_hl='\[\e[97;41m\]' # white on red, for "prod" only
+	local context reset='\[\e[0m\]'
+	local matrix='\[\e[92m\]'     # neon matrix green
+	local prod_hl='\[\e[97;41m\]' # white on red, for "prod" only
 
-    context=$(kubectl config current-context 2>/dev/null) || return
+	context=$(kubectl config current-context 2>/dev/null) || return
 
-    local display="$context"
-    if [[ "$context" == *prod* ]]; then
-        display="${context//prod/${prod_hl}prod${reset}${matrix}}"
-    fi
+	local display="$context"
+	if [[ "$context" == *prod* ]]; then
+		display="${context//prod/${prod_hl}prod${reset}${matrix}}"
+	fi
 
-    printf '%s[⎈%s]%s' "$matrix" "$display" "$reset"
+	printf '%s[⎈%s]%s' "$matrix" "$display" "$reset"
 }
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '\''*'\'' | colrm 1 2); PS1="\[\e[90m\][\$(date +'\''%H:%M'\'')]\[\e[36m\]\[\e[35m\]\u\[\e[0m\]:\[\e[36m\]\w"; if [ -n "$PS1_CMD1" ]; then PS1+="\[\e[0;94m\][${PS1_CMD1}]"; fi; PS1_CMD2=$(__kube_context_prompt); if [ -n "$PS1_CMD2" ]; then PS1+="${PS1_CMD2}"; fi; PS1+="\[\e[0m\]\\$ "'
@@ -135,8 +135,8 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:$HOME/.cargo/bin"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 . "$HOME/.atuin/bin/env"
 
@@ -153,8 +153,8 @@ export PATH=/home/filip/.opencode/bin:$PATH
 # pnpm
 export PNPM_HOME="/home/filip/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+*":$PNPM_HOME/bin:"*) ;;
+*) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
 
@@ -174,33 +174,38 @@ export PATH="$PATH:$HOME/kotlinc/bin"
 # zoxide
 eval "$(zoxide init bash)"
 
+complete -o default -F __start_kubectl k
+
 # Shortcut to run a program in a specific sway workspace.
 #   ww 2 code .          -> workspace 2 (wherever it lives), launch
 #   ww up 2 code .       -> workspace 2, moved to the output above, launch
 #   ww up code .         -> fresh workspace on the output above, launch
 #   ww code .            -> fresh workspace on the current output, launch
 ww() {
-    local dir="" ws
-    case "$1" in
-        up|down|left|right) dir="$1"; shift ;;
-    esac
-    if [[ "$1" =~ ^[0-9]+$ ]]; then
-        ws="$1"
-        shift
-    else
-        ws=$(ws_free)
-    fi
-    swaymsg workspace "$ws"
-    [ -n "$dir" ] && swaymsg move workspace to output "$dir"
-    if [ $# -gt 0 ]; then
-        "$@"
-    fi
+	local dir="" ws
+	case "$1" in
+	up | down | left | right)
+		dir="$1"
+		shift
+		;;
+	esac
+	if [[ "$1" =~ ^[0-9]+$ ]]; then
+		ws="$1"
+		shift
+	else
+		ws=$(ws_free)
+	fi
+	swaymsg workspace "$ws"
+	[ -n "$dir" ] && swaymsg move workspace to output "$dir"
+	if [ $# -gt 0 ]; then
+		"$@"
+	fi
 }
 
 # Lowest unused numbered sway workspace, e.g. ww up "$(ws_free)" code .
 ws_free() {
-    local used n=1
-    used=$(swaymsg -t get_workspaces | jq '[.[].num]')
-    while echo "$used" | jq -e "index($n)" >/dev/null; do n=$((n + 1)); done
-    echo "$n"
+	local used n=1
+	used=$(swaymsg -t get_workspaces | jq '[.[].num]')
+	while echo "$used" | jq -e "index($n)" >/dev/null; do n=$((n + 1)); done
+	echo "$n"
 }
