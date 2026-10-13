@@ -103,7 +103,7 @@ __kube_context_prompt() {
         display="${context//prod/${prod_hl}prod${reset}${matrix}}"
     fi
 
-    printf '%s[⎈ %s]%s' "$matrix" "$display" "$reset"
+    printf '%s[⎈%s]%s' "$matrix" "$display" "$reset"
 }
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '\''*'\'' | colrm 1 2); PS1="\[\e[90m\][\$(date +'\''%H:%M'\'')]\[\e[36m\]\[\e[35m\]\u\[\e[0m\]:\[\e[36m\]\w"; if [ -n "$PS1_CMD1" ]; then PS1+="\[\e[0;94m\][${PS1_CMD1}]"; fi; PS1_CMD2=$(__kube_context_prompt); if [ -n "$PS1_CMD2" ]; then PS1+="${PS1_CMD2}"; fi; PS1+="\[\e[0m\]\\$ "'
