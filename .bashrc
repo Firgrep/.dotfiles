@@ -33,13 +33,18 @@ alias br='bun run'
 alias backup="~/.dotfiles/backup.sh"
 alias here="xdg-open . &"
 alias k9s='~/dev/tools/k9s/execs/k9s'
-alias claude='claude --permission-mode auto'
 alias wm='workmux'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 alias k=kubectl
 alias ktest="kubectl --context=happi-aks-test"
 alias kprod="kubectl --context=happi-aks-prod"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+alias claude='claude --permission-mode auto'
+alias opus="claude --model opus"
+alias sonnet="claude --model sonnet"
+alias fable="claude --model fable"
+alias haiku="claude --model haiku"
 alias op-fable="opencode -m github-copilot/claude-fable-5"
 alias op-opus="opencode -m github-copilot/claude-opus-5"
 alias op-sonnet="opencode -m github-copilot/claude-sonnet-5"
@@ -174,6 +179,7 @@ export PATH="$PATH:$HOME/kotlinc/bin"
 # zoxide
 eval "$(zoxide init bash)"
 
+source <(kubectl completion bash)
 complete -o default -F __start_kubectl k
 
 # Shortcut to run a program in a specific sway workspace.
