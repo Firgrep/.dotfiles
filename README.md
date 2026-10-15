@@ -34,3 +34,14 @@ Without a `.stow-local-ignore` file, `stow` will use [defaults](https://www.gnu.
   tar xf lazygit.tar.gz lazygit
   sudo install lazygit -D -t /usr/local/bin/
   ```
+
+### `claude` usage-gauge mod
+
+Status line mod in `.claude/mods/usage-gauge/`. It shows:
+
+- model name with an icon
+- compaction count (hidden at 0, gray up to 3, orange from 4, red from 10)
+- Session and Week limits with a bar, percent and reset time
+- context size, e.g. `ctx 84k/1M (8%)`
+
+Needs a Nerd Font for the icons.
