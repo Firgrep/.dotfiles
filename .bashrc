@@ -40,6 +40,7 @@ alias k=kubectl
 alias ktest="kubectl --context=happi-aks-test"
 alias kprod="kubectl --context=happi-aks-prod"
 
+export CLAUDE_CODE_PLUGIN_DIRS="$HOME/.claude/mods/usage-gauge"
 alias claude='claude --permission-mode auto'
 alias opus="claude --model opus"
 alias sonnet="claude --model sonnet"

@@ -1,0 +1,1 @@
+{ "name": "usage-gauge", "version": "0.1.0", "description": "Gauge in the prompt footer for the 5-hour session and weekly usage limits, then context window fill", "types": "./types/index.d.ts" }
