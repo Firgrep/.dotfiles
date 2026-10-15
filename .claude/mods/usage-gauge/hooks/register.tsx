@@ -6,6 +6,7 @@ import type { Fill, Limit } from '../types'
 const limits = atom({ plugin: 'usage-gauge', key: 'limits' } as const, [] as Limit[])
 const fill = atom({ plugin: 'usage-gauge', key: 'fill' } as const, null as Fill | null)
 const model = atom({ plugin: 'usage-gauge', key: 'model' } as const, null as string | null)
+const compactions = atom({ plugin: 'usage-gauge', key: 'compactions' } as const, 0)
 
 const WIDTH = 10
 const NARROW = 100
@@ -24,6 +25,11 @@ export const modelLabel = (name: string) => {
 
   return icon ? `${icon} ${short}` : short
 }
+
+const COMPACT_ICON = '\u{F0615}'
+
+export const compactColor = (count: number): ThemeKey =>
+  count >= 10 ? 'error' : count >= 4 ? 'warning' : 'subtle'
 
 export const bar = (percent: number) => {
   const filled = Math.round((Math.min(percent, 100) / 100) * WIDTH)
@@ -100,6 +106,16 @@ export const register: Register = on => {
     return result
   })
 
+  on('session.compact', async ($, e, next) => {
+    const result = await next(e)
+
+    if (!('skip' in result && result.skip) && e.trigger !== 'precompute' && !e.agentId) {
+      await update($, compactions, n => n + 1)
+    }
+
+    return result
+  })
+
   on('session.measure', async ($, e, next) => {
     await update($, limits, () => e.rateLimits)
 
@@ -114,6 +130,7 @@ export const register: Register = on => {
     const shown = gauges(await read($, limits))
     const context = await read($, fill)
     const name = await read($, model)
+    const compacted = await read($, compactions)
 
     if (shown.length === 0 && context === null && name === null) {
       return next(e)
@@ -128,6 +145,11 @@ export const register: Register = on => {
       <Box flexDirection="row" flexShrink={0}>
         {hasModes ? <Box marginRight={3}>{await next(e)}</Box> : ''}
         {name === null ? '' : <Text>{modelLabel(name)}   </Text>}
+        {compacted === 0 ? '' : (
+          <Text color={compactColor(compacted)} dimColor={compacted <= 3}>
+            {COMPACT_ICON} {compacted}{'   '}
+          </Text>
+        )}
         {shown.map((g, i) => {
           const left = until(g.resetsAt, now)
 

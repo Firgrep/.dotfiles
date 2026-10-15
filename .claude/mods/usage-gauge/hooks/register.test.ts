@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'claude-code/testing'
 
-import { bar, colorFor, contextLabel, gauges, modelLabel, until } from './register'
+import { bar, colorFor, compactColor, contextLabel, gauges, modelLabel, until } from './register'
 
 describe('usage gauge', () => {
   test('orders session before week and drops other windows', async () => {
@@ -41,5 +41,13 @@ describe('usage gauge', () => {
     expect(modelLabel('claude-haiku-5-5')).toBe('\u{F024A} haiku-5-5')
     expect(modelLabel('claude-fable-5-1')).toBe('\u{F14F7} fable-5-1')
     expect(modelLabel('mystery-1')).toBe('mystery-1')
+  })
+
+  test('colors the compaction count by how many have happened', async () => {
+    expect(compactColor(1)).toBe('subtle')
+    expect(compactColor(3)).toBe('subtle')
+    expect(compactColor(4)).toBe('warning')
+    expect(compactColor(9)).toBe('warning')
+    expect(compactColor(10)).toBe('error')
   })
 })

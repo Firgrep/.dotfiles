@@ -3,6 +3,6 @@ export type Fill = { tokens: number | null; window: number; percent: number | nu
 
 declare module 'claude-code' {
   interface PluginState {
-    'usage-gauge': { limits: Limit[]; fill: Fill | null; model: string | null }
+    'usage-gauge': { limits: Limit[]; fill: Fill | null; model: string | null; compactions: number }
   }
 }
