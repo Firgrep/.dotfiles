@@ -11,6 +11,20 @@ const WIDTH = 10
 const NARROW = 100
 const LABELS: Record<string, string> = { five_hour: 'Session', seven_day: 'Week' }
 
+const ICONS: Record<string, string> = {
+  fable: '\u{F14F7}',
+  opus: '\u{F075A}',
+  sonnet: '\u{F03EB}',
+  haiku: '\u{F024A}',
+}
+
+export const modelLabel = (name: string) => {
+  const short = name.replace(/^claude-/, '')
+  const icon = ICONS[Object.keys(ICONS).find(k => short.toLowerCase().includes(k)) ?? '']
+
+  return icon ? `${icon} ${short}` : short
+}
+
 export const bar = (percent: number) => {
   const filled = Math.round((Math.min(percent, 100) / 100) * WIDTH)
 
@@ -113,7 +127,7 @@ export const register: Register = on => {
     return (
       <Box flexDirection="row" flexShrink={0}>
         {hasModes ? <Box marginRight={3}>{await next(e)}</Box> : ''}
-        {name === null ? '' : <Text>{name}   </Text>}
+        {name === null ? '' : <Text>{modelLabel(name)}   </Text>}
         {shown.map((g, i) => {
           const left = until(g.resetsAt, now)
 

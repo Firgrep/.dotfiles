@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'claude-code/testing'
 
-import { bar, colorFor, contextLabel, gauges, until } from './register'
+import { bar, colorFor, contextLabel, gauges, modelLabel, until } from './register'
 
 describe('usage gauge', () => {
   test('orders session before week and drops other windows', async () => {
@@ -33,5 +33,13 @@ describe('usage gauge', () => {
     expect(contextLabel({ tokens: null, window: 200_000, percent: null, compact: null })).toBe('ctx –/200k')
     expect(contextLabel({ tokens: null, window: 1_000_000, percent: null, compact: 250_000 })).toBe('ctx –/250k')
     expect(contextLabel({ tokens: 50_000, window: 1_000_000, percent: 5, compact: 250_000 })).toBe('ctx 50k/250k (20%)')
+  })
+
+  test('prefixes the model with a nerd font glyph and drops the claude- prefix', async () => {
+    expect(modelLabel('claude-sonnet-5-5')).toBe('\u{F03EB} sonnet-5-5')
+    expect(modelLabel('claude-opus-5-5')).toBe('\u{F075A} opus-5-5')
+    expect(modelLabel('claude-haiku-5-5')).toBe('\u{F024A} haiku-5-5')
+    expect(modelLabel('claude-fable-5-1')).toBe('\u{F14F7} fable-5-1')
+    expect(modelLabel('mystery-1')).toBe('mystery-1')
   })
 })
