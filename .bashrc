@@ -119,7 +119,7 @@ __kube_context_prompt() {
 	# unset namespace means "default", which isn't worth showing
 	local ns=""
 	if [[ -n "$namespace" && "$namespace" != default ]]; then
-		ns="${orange}:${matrix}${namespace}"
+		ns="${orange}:${namespace}${matrix}"
 	fi
 
 	printf '%s[⎈%s%s]%s' "$matrix" "$display" "$ns" "$reset"
