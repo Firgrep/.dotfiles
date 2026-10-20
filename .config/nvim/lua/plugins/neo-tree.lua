@@ -29,6 +29,8 @@ return {
       mappings = {
         ["<C-d>"] = { "scroll_preview", config = { direction = -10 } },
         ["<C-u>"] = { "scroll_preview", config = { direction = 10 } },
+        ["<C-;>"] = false,
+        ["X"] = "clear_selection",
         ["<C-f>"] = false,
         ["<C-b>"] = false,
       },
