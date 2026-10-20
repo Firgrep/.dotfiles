@@ -34,6 +34,7 @@ alias backup="~/.dotfiles/backup.sh"
 alias here="xdg-open . &"
 alias k9s='~/dev/tools/k9s/execs/k9s'
 alias wm='workmux'
+alias sb='source ~/.bashrc'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias k=kubectl
@@ -98,18 +99,29 @@ alias dir10='du -cksh * | sort -hr | head -n 10'
 #=== PROMPT
 # always know the kubectl context before writing changes to prod unknowingly
 __kube_context_prompt() {
-	local context reset='\[\e[0m\]'
+	local context namespace reset='\[\e[0m\]'
 	local matrix='\[\e[92m\]'     # neon matrix green
+	local orange='\[\e[38;5;208m\]'
 	local prod_hl='\[\e[97;41m\]' # white on red, for "prod" only
 
-	context=$(kubectl config current-context 2>/dev/null) || return
+	# one kubectl call for both; "|" because read would collapse an empty namespace
+	IFS='|' read -r context namespace < <(
+		kubectl config view --minify -o jsonpath='{.current-context}|{..namespace}' 2>/dev/null
+	)
+	[[ -n "$context" ]] || return
 
 	local display="$context"
 	if [[ "$context" == *prod* ]]; then
 		display="${context//prod/${prod_hl}prod${reset}${matrix}}"
 	fi
 
-	printf '%s[⎈%s]%s' "$matrix" "$display" "$reset"
+	# unset namespace means "default", which isn't worth showing
+	local ns=""
+	if [[ -n "$namespace" && "$namespace" != default ]]; then
+		ns="${orange}:${matrix}${namespace}"
+	fi
+
+	printf '%s[⎈%s%s]%s' "$matrix" "$display" "$ns" "$reset"
 }
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch 2>/dev/null | grep '\''*'\'' | colrm 1 2); PS1="\[\e[90m\][\$(date +'\''%H:%M'\'')]\[\e[36m\]\[\e[35m\]\u\[\e[0m\]:\[\e[36m\]\w"; if [ -n "$PS1_CMD1" ]; then PS1+="\[\e[0;94m\][${PS1_CMD1}]"; fi; PS1_CMD2=$(__kube_context_prompt); if [ -n "$PS1_CMD2" ]; then PS1+="${PS1_CMD2}"; fi; PS1+="\[\e[0m\]\\$ "'
