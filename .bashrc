@@ -40,6 +40,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias k=kubectl
 alias ktest="kubectl --context=happi-aks-test"
 alias kprod="kubectl --context=happi-aks-prod"
+alias kns='kubectl config set-context --current --namespace '
 
 export CLAUDE_CODE_PLUGIN_DIRS="$HOME/.claude/mods/usage-gauge"
 alias claude='claude --permission-mode auto'
@@ -100,7 +101,7 @@ alias dir10='du -cksh * | sort -hr | head -n 10'
 # always know the kubectl context before writing changes to prod unknowingly
 __kube_context_prompt() {
 	local context namespace reset='\[\e[0m\]'
-	local matrix='\[\e[92m\]'     # neon matrix green
+	local matrix='\[\e[92m\]' # neon matrix green
 	local orange='\[\e[38;5;208m\]'
 	local prod_hl='\[\e[97;41m\]' # white on red, for "prod" only
 
