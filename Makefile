@@ -1,4 +1,7 @@
-.PHONY: stow unstow restow
+.PHONY: install stow unstow restow
+
+install:
+	bash install.sh
 
 stow:
 	# pre-create ~/.claude so stow links only .claude/mods instead of folding the whole dir into a symlink

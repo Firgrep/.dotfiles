@@ -64,6 +64,33 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-in
 # zoxide: official installer puts the binary in ~/.local/bin
 curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
+# Go, from the official tarball into /usr/local/go (the PATH entry already in .bashrc).
+# Mason builds gopls, delve, goimports etc. with `go install`.
+GO_VERSION=$(curl -s "https://go.dev/VERSION?m=text" | head -1)
+curl -Lo /tmp/go.tar.gz "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf /tmp/go.tar.gz
+rm /tmp/go.tar.gz
+/usr/local/go/bin/go version
+
+# Node via nvm (sourced by .bashrc): Mason installs biome, yaml-language-server,
+# json-lsp and mdx-analyzer with npm.
+NVM_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": *"\K[^"]*')
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | PROFILE=/dev/null bash
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+nvm install 26
+nvm alias default 26
+
+# pnpm, standalone installer (needs no Node, but sits with the other JS tooling)
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+# uv + Python 3.13: the distro's python3 can be newer than Mason's Python tools support
+# (nginx-language-server needs <3.14). uv puts python3.13 in ~/.local/bin, which Mason
+# finds as a versioned candidate without replacing the system python3.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+~/.local/bin/uv python install 3.13
+
 # kubectl, latest stable release, installed to /usr/local/bin
 KUBECTL_VERSION=$(curl -Ls https://dl.k8s.io/release/stable.txt)
 curl -Lo kubectl "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
