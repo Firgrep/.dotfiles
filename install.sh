@@ -50,3 +50,31 @@ curl -Lo fzf.tar.gz "https://github.com/junegunn/fzf/releases/download/v${FZF_VE
 tar xf fzf.tar.gz fzf
 install -D -t ~/.local/bin fzf
 rm fzf.tar.gz fzf
+
+# Rust toolchain via rustup: creates ~/.cargo/env, which .bashrc sources
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+# rustup-init only installs when missing, so also update an existing toolchain to the newest stable
+. "$HOME/.cargo/env"
+rustup update stable
+
+# atuin: the installer creates ~/.atuin/bin/env, which .bashrc sources.
+# Local-only history afterwards: `atuin import auto` (no cloud sync).
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
+
+# zoxide: official installer puts the binary in ~/.local/bin
+curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+# kubectl, latest stable release, installed to /usr/local/bin
+KUBECTL_VERSION=$(curl -Ls https://dl.k8s.io/release/stable.txt)
+curl -Lo kubectl "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+rm kubectl
+
+# Inconsolata Nerd Font, per-user install to ~/.local/share/fonts
+NERD_FONT_VERSION="v3.5.1"
+FONT_TMP=$(mktemp -d)
+curl -Lo "$FONT_TMP/Inconsolata.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONT_VERSION}/Inconsolata.zip"
+mkdir -p ~/.local/share/fonts/InconsolataNerdFont
+unzip -o -q "$FONT_TMP/Inconsolata.zip" '*.ttf' -d ~/.local/share/fonts/InconsolataNerdFont
+rm -rf "$FONT_TMP"
+fc-cache -f ~/.local/share/fonts
