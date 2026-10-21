@@ -24,5 +24,6 @@ CVS
 LICENSE
 .*\.md$
 cspell.json
+^/justfile
 
 internal

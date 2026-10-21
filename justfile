@@ -1,5 +1,3 @@
-.PHONY: install stow unstow restow
-
 install:
 	bash install.sh
 

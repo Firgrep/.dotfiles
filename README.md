@@ -4,7 +4,7 @@ The start of a dotty journey.
 
 Feel welcome to copy!
 
-`make stow` to populate symlinks.
+`just stow` to populate symlinks (`bash install.sh` first on a fresh machine, which also installs `just`).
 
 ### `stow` defaults
 
