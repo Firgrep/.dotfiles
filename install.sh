@@ -372,6 +372,9 @@ EOF
 
   sudo apt-get update
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+  # Use docker (and lazydocker) without sudo; takes effect in new login shells
+  sudo usermod -aG docker "$USER"
 }
 
 # lazydocker: official install/update script puts the binary in ~/.local/bin
