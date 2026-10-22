@@ -18,6 +18,7 @@ NORMAL MODE
 	ACTION
 	dd	    	delete line
 	dw 	    	delete from cursor to the start of next word
+	ciw 		delete word and start cursor within it
 	u	    	undo last change
 	Ctrl+r		redo (undo the undo)
 	K		show inline documentation
@@ -34,8 +35,9 @@ NORMAL MODE
 		ctrl+j / k	Scroll up and down results
 
 	<leader> l	Language tools
-		R	        Search References
+		d 			Diagnostic window
 		D 			Search Diagnostics
+		R	        Search References
 	<leader> gg	Lazygit
 
 
