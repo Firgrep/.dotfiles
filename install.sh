@@ -26,6 +26,8 @@ APT_PACKAGES=(
   fd-find         # used by pickers/live-grep
   python3-pip     # Mason installs Python-based tools (e.g. nginx-config-formatter) into their own venv
   python3-venv
+  htop
+  btop
   # plus libicuNN, resolved at runtime: marksman (Markdown LSP) is a .NET binary
   # that aborts (SIGABRT) on startup without an ICU package installed on the system
 )
