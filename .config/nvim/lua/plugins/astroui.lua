@@ -33,6 +33,8 @@ return {
     highlights = {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
+        -- sandy yellow of plain folder icons (see icons.lua)
+        FolderSand = { fg = "#DCB67A" },
       },
       astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
