@@ -33,10 +33,9 @@ NORMAL MODE
 		w		    Find words (grep)
 		ctrl+j / k	Scroll up and down results
 
-
 	<leader> l	Language tools
 		R	        Search References
-
+		D 			Search Diagnostics
 	<leader> gg	Lazygit
 
 
