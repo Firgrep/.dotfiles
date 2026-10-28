@@ -20,6 +20,7 @@ UV_PYTHON="3.13"
 APT_PACKAGES=(
   xclip
   stow
+  tmux
   build-essential # compiles treesitter parsers
   unzip           # several Mason-installed tools (stylua, selene, terraform-ls, tflint, ...) ship as .zip
   ripgrep         # used by pickers/live-grep
@@ -220,7 +221,7 @@ install_rust() {
 # is old or absent) following INSTALL.md: binary to /usr/local/bin (so sway's
 # `exec alacritty` finds it), plus terminfo, desktop entry and man pages. Needs
 # the build deps from the apt phase and the rust phase. Shell completions are
-# left out; the config itself is not installed here (see backup/alacritty).
+# left out; the config lives in .config/alacritty and is linked by `just stow`.
 check_alacritty() {
   found "$(latest_gh_tag alacritty/alacritty)" "$(alacritty --version 2>/dev/null | awk '{print $2}' || true)"
 }
@@ -261,7 +262,7 @@ install_just() {
   cargo binstall --no-confirm --force "just@$WANT"
 }
 
-# atuin: the installer creates ~/.atuin/bin/env, which .bashrc sources.
+# atuin: the installer puts the binary in ~/.atuin/bin, which .bashrc adds to PATH.
 # Local-only history afterwards: `atuin import auto` (no cloud sync).
 check_atuin() {
   found "$(latest_gh_tag atuinsh/atuin)" "$(atuin --version 2>/dev/null | awk '{print $2}' || true)"
@@ -463,7 +464,25 @@ install_chrome() {
   sudo apt-get install -y "$TMP/chrome.deb"
 }
 
-PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker gh chrome lazydocker)
+# TPM (tmux plugin manager), which .tmux.conf runs at the end. Tracks the
+# default branch HEAD by commit; plugins from .tmux.conf are installed after.
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+check_tpm() {
+  local want have=""
+  want=$(git ls-remote https://github.com/tmux-plugins/tpm HEAD | cut -c1-7)
+  [[ -d $TPM_DIR/.git ]] && have=$(git -C "$TPM_DIR" rev-parse --short=7 HEAD)
+  found "$want" "$have"
+}
+install_tpm() {
+  if [[ -d $TPM_DIR/.git ]]; then
+    git -C "$TPM_DIR" pull --ff-only
+  else
+    git clone --depth 1 https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  fi
+  "$TPM_DIR/bin/install_plugins"
+}
+
+PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker gh chrome lazydocker tpm)
 
 CHECK=0 FORCE=0 NO_UPGRADE=0 ONLY=""
 while [[ $# -gt 0 ]]; do

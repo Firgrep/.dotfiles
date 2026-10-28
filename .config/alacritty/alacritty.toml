@@ -1,5 +1,8 @@
 [keyboard]
-bindings = [{ key = "Back", mods = "Control", chars = "\u0017" }]
+bindings = [
+  { key = "Back", mods = "Control", chars = "\u0017" },
+  { key = "Return", mods = "Shift", chars = "\u001B\r" },
+]
 
 [colors.primary]
 background = '#1c1c1c'
