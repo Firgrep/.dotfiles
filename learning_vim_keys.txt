@@ -21,6 +21,7 @@ NORMAL MODE
 	ciw 		delete word and start cursor within it
 	u	    	undo last change
 	Ctrl+r		redo (undo the undo)
+	gd 			go to definition
 	K		show inline documentation
 	grn		rename (scope-aware, LSP supported)
 

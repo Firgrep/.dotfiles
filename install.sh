@@ -28,6 +28,15 @@ APT_PACKAGES=(
   python3-venv
   htop
   btop
+  cmake              # alacritty build deps (INSTALL.md, Debian/Ubuntu)
+  g++
+  pkg-config
+  libfontconfig1-dev
+  libxcb-xfixes0-dev
+  libxkbcommon-dev
+  python3
+  scdoc              # alacritty man pages
+  desktop-file-utils # alacritty desktop entry
   # plus libicuNN, resolved at runtime: marksman (Markdown LSP) is a .NET binary
   # that aborts (SIGABRT) on startup without an ICU package installed on the system
 )
@@ -198,6 +207,32 @@ install_rust() {
   else
     rustup update stable
   fi
+}
+
+# Alacritty, built from the release tag's source tarball (Ubuntu's apt package
+# is old or absent) following INSTALL.md: binary to /usr/local/bin (so sway's
+# `exec alacritty` finds it), plus terminfo, desktop entry and man pages. Needs
+# the build deps from the apt phase and the rust phase. Shell completions are
+# left out; the config itself is not installed here (see backup/alacritty).
+check_alacritty() {
+  found "$(latest_gh_tag alacritty/alacritty)" "$(alacritty --version 2>/dev/null | awk '{print $2}' || true)"
+}
+install_alacritty() {
+  local src="$TMP/alacritty-$WANT" page
+  curl -fLo "$TMP/alacritty.tar.gz" "https://github.com/alacritty/alacritty/archive/refs/tags/v${WANT}.tar.gz"
+  tar -C "$TMP" -xzf "$TMP/alacritty.tar.gz"
+  (cd "$src" && cargo build --release)
+
+  sudo install -m 0755 "$src/target/release/alacritty" /usr/local/bin/alacritty
+  infocmp alacritty >/dev/null 2>&1 || sudo tic -xe alacritty,alacritty-direct "$src/extra/alacritty.info"
+  sudo cp "$src/extra/logo/alacritty-term.svg" /usr/share/pixmaps/Alacritty.svg
+  sudo desktop-file-install "$src/extra/linux/Alacritty.desktop"
+  sudo update-desktop-database
+
+  for page in alacritty.1 alacritty-msg.1 alacritty.5 alacritty-bindings.5 alacritty-escapes.7; do
+    sudo mkdir -p "/usr/local/share/man/man${page##*.}"
+    scdoc <"$src/extra/man/$page.scd" | gzip -c | sudo tee "/usr/local/share/man/man${page##*.}/$page.gz" >/dev/null
+  done
 }
 
 # cargo-binstall: fetches prebuilt release binaries instead of compiling crates
@@ -388,7 +423,7 @@ install_lazydocker() {
   curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 }
 
-PHASES=(apt fd_link nvim lazygit fzf rust binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker lazydocker)
+PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker lazydocker)
 
 CHECK=0 FORCE=0 NO_UPGRADE=0 ONLY=""
 while [[ $# -gt 0 ]]; do
