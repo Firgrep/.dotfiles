@@ -107,6 +107,13 @@ latest_gh_tag() {
   curl -fsSI "https://github.com/$1/releases/latest" | grep -Pio '^location:.*/tag/v?\K[^\r\n]+'
 }
 
+# Hardened systems mount /tmp noexec, which breaks rustup-init, cargo build
+# scripts and similar. Fall back to a scratch dir under ~/.cache in that case.
+if findmnt -no OPTIONS -T "${TMPDIR:-/tmp}" 2>/dev/null | grep -qw noexec; then
+  export TMPDIR="$HOME/.cache/dotfiles-install"
+  mkdir -p "$TMPDIR"
+fi
+
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 
