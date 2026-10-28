@@ -178,6 +178,8 @@ install_nvim() {
   sudo rm -rf /opt/nvim-linux64
   sudo tar -C /opt -xzf "$TMP/nvim.tar.gz"
   sudo mv /opt/nvim-linux-x86_64 /opt/nvim-linux64
+  # a restrictive umask (e.g. 027) would otherwise leave it root-only
+  sudo chmod -R a+rX /opt/nvim-linux64
   sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
 }
 
@@ -291,6 +293,7 @@ install_go() {
   curl -fLo "$TMP/go.tar.gz" "https://go.dev/dl/go${WANT}.linux-amd64.tar.gz"
   sudo rm -rf /usr/local/go
   sudo tar -C /usr/local -xzf "$TMP/go.tar.gz"
+  sudo chmod -R a+rX /usr/local/go
 }
 
 # nvm (sourced by .bashrc). Re-running the installer updates an existing nvm.
