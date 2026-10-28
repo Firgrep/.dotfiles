@@ -1,3 +1,7 @@
+[terminal.shell]
+program = "bash"
+args = ["-c", "exec \"$HOME/.config/alacritty/tmux-start.sh\""]
+
 [keyboard]
 bindings = [
   { key = "Back", mods = "Control", chars = "\u0017" },
