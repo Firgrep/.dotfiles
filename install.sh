@@ -423,7 +423,28 @@ install_lazydocker() {
   curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 }
 
-PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker lazydocker)
+# GitHub CLI from GitHub's apt repo (cli/cli docs/install_linux.md). Skipped when
+# gh is already present; updates come via apt upgrade.
+check_gh() {
+  local have
+  have=$(gh --version 2>/dev/null | grep -Po '^gh version \K\S+' || true)
+  found "${have:-gh}" "$have" "$have, updates via apt upgrade"
+}
+install_gh() {
+  sudo apt-get update
+  sudo apt-get install -y curl
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /etc/apt/keyrings/githubcli-archive-keyring.gpg
+  sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |
+    sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+
+  sudo apt-get update
+  sudo apt-get install -y gh
+}
+
+PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker gh lazydocker)
 
 CHECK=0 FORCE=0 NO_UPGRADE=0 ONLY=""
 while [[ $# -gt 0 ]]; do
