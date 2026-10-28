@@ -444,7 +444,19 @@ install_gh() {
   sudo apt-get install -y gh
 }
 
-PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker gh lazydocker)
+# Google Chrome from Google's .deb. The package's postinst adds Google's apt
+# repo, so later updates come via apt upgrade. Skipped when already present.
+check_chrome() {
+  local have
+  have=$(google-chrome --version 2>/dev/null | grep -Po 'Chrome \K\S+' || true)
+  found "${have:-google-chrome-stable}" "$have" "$have, updates via apt upgrade"
+}
+install_chrome() {
+  curl -fLo "$TMP/chrome.deb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo apt-get install -y "$TMP/chrome.deb"
+}
+
+PHASES=(apt fd_link nvim lazygit fzf rust alacritty binstall just atuin zoxide go nvm node pnpm uv python kubectl font docker gh chrome lazydocker)
 
 CHECK=0 FORCE=0 NO_UPGRADE=0 ONLY=""
 while [[ $# -gt 0 ]]; do
