@@ -12,6 +12,7 @@ return {
   { import = "astrocommunity.scrolling.satellite-nvim" },
   { import = "astrocommunity.colorscheme.vscode-nvim" },
   { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
+  { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.pack.golangci-lint" },
   { import = "astrocommunity.pack.docker" },
   { import = "astrocommunity.pack.json" },
