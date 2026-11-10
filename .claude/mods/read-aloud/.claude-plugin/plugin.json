@@ -1,0 +1,1 @@
+{ "name": "read-aloud", "version": "0.1.0", "description": "Reads Claude's replies aloud with a local Kokoro voice, skipping code blocks and tool output" }
