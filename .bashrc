@@ -32,6 +32,7 @@ alias rm='rm -v'
 alias br='bun run'
 alias backup="~/.dotfiles/backup.sh"
 alias here="xdg-open . &"
+alias restart-audio='systemctl --user restart pipewire pipewire-pulse wireplumber'
 alias k9s='~/dev/tools/k9s/execs/k9s'
 alias wm='workmux'
 alias sb='source ~/.bashrc'
@@ -42,7 +43,7 @@ alias ktest="kubectl --context=happi-aks-test"
 alias kprod="kubectl --context=happi-aks-prod"
 alias kns='kubectl config set-context --current --namespace '
 
-export CLAUDE_CODE_PLUGIN_DIRS="$HOME/.claude/mods/usage-gauge"
+export CLAUDE_CODE_PLUGIN_DIRS="$HOME/.claude/mods/usage-gauge:$HOME/.claude/mods/read-aloud"
 alias claude='claude --permission-mode auto'
 alias opus="claude --model opus"
 alias sonnet="claude --model sonnet"
@@ -229,3 +230,6 @@ ws_free() {
 	while echo "$used" | jq -e "index($n)" >/dev/null; do n=$((n + 1)); done
 	echo "$n"
 }
+
+# user binaries (e.g. devtunnel)
+export PATH="$HOME/bin:$PATH"
