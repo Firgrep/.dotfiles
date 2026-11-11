@@ -120,6 +120,15 @@ return {
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+
+        -- GNOME/mutter lacks wlr-data-control, so wl-copy pops up a
+        -- "wl-clipboard is ready" window and fails to copy. Use xclip (XWayland).
+        clipboard = {
+          name = "xclip",
+          copy = { ["+"] = "xclip -selection clipboard -in", ["*"] = "xclip -selection primary -in" },
+          paste = { ["+"] = "xclip -selection clipboard -out", ["*"] = "xclip -selection primary -out" },
+          cache_enabled = 0,
+        },
       },
     },
     -- Mappings can be configured through AstroCore as well.
