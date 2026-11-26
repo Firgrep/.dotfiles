@@ -125,7 +125,11 @@ return {
         -- "wl-clipboard is ready" window and fails to copy. Use xclip (XWayland).
         clipboard = {
           name = "xclip",
-          copy = { ["+"] = "xclip -selection clipboard -in", ["*"] = "xclip -selection primary -in" },
+          copy = {
+            -- xclip alone does not always reach Wayland apps; see the script.
+            ["+"] = vim.fn.expand "~/.dotfiles/scripts/clip-copy.sh",
+            ["*"] = "xclip -selection primary -in",
+          },
           paste = { ["+"] = "xclip -selection clipboard -out", ["*"] = "xclip -selection primary -out" },
           cache_enabled = 0,
         },
